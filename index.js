@@ -43,7 +43,7 @@ resetColorButton.addEventListener('dblclick', resetBackgroundColor);
 // Detect keyboard key presses
 document.addEventListener('keydown', displayKeyPress);
 
-// Display text as the user types
+// Display text as the user type
 textInput.addEventListener('input', displayUserInput);
 
 
