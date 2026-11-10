@@ -1,50 +1,64 @@
 
-
-// 1. Access HTML elements
-const changeColorButton = document.getElementById('changeColorButton');
-const resetColorButton = document.getElementById('resetColorButton');
-const keyPressDisplay = document.getElementById('keyPressDisplay');
-const textInput = document.getElementById('textInput');
-const textInputDisplay = document.getElementById('textInputDisplay');
-
-
-// 2. Change background color when button is clicked
+// 1. Change background color
 function changeBackgroundColor() {
-    document.body.style.backgroundColor = 'lightblue';
+    document.body.style.backgroundColor = 'rgb(0, 128, 0)';
 }
 
-
-// 3. Reset background color when button is double-clicked
+// 2. Reset background color
 function resetBackgroundColor() {
-    document.body.style.backgroundColor = 'white';
+    document.body.style.backgroundColor = '';
 }
 
-
-// 4. Display the key pressed by the user
+// 3. Display key pressed
 function displayKeyPress(event) {
-    keyPressDisplay.textContent = `You pressed: ${event.key}`;
+    const keyPressDisplay = document.getElementById('keyPressDisplay');
+
+    keyPressDisplay.textContent = `Key pressed: ${event.key}`;
 }
 
-
-// 5. Display user input in real time
+// 4. Display user input
 function displayUserInput() {
+    const textInput = document.getElementById('textInput');
+    const textInputDisplay = document.getElementById('textInputDisplay');
+
     textInputDisplay.textContent = `You typed: ${textInput.value}`;
 }
 
+// 5. Setup event listeners
+function setupEventListeners() {
+    const changeColorButton = document.getElementById('changeColorButton');
+    const resetColorButton = document.getElementById('resetColorButton');
+    const textInput = document.getElementById('textInput');
 
-// 6. Attach event listeners
+    if (changeColorButton) {
+        changeColorButton.addEventListener('click', changeBackgroundColor);
+    }
 
-// Single click changes background color
-changeColorButton.addEventListener('click', changeBackgroundColor);
+    if (resetColorButton) {
+        resetColorButton.addEventListener('dblclick', resetBackgroundColor);
+    }
 
-// Double click resets background color
-resetColorButton.addEventListener('dblclick', resetBackgroundColor);
+    document.addEventListener('keydown', displayKeyPress);
 
-// Detect keyboard key presses
-document.addEventListener('keydown', displayKeyPress);
+    if (textInput) {
+        textInput.addEventListener('input', displayUserInput);
+    }
+}
 
-// Display text as the user type
-textInput.addEventListener('input', displayUserInput);
+// 6. Initialize event listeners
+if (typeof document !== 'undefined') {
+    setupEventListeners();
+}
+
+// 7. Export functions
+module.exports = {
+    changeBackgroundColor,
+    resetBackgroundColor,
+    displayKeyPress,
+    displayUserInput,
+    setupEventListeners
+};
+
 
 
 
